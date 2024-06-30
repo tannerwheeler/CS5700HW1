@@ -24,8 +24,6 @@ abstract class RoundShape(
         for (line in radii) {
             if (line.startPoint == center && line.endPoint != center) {
                 trueCount += 1
-            } else if (line.startPoint != center && line.endPoint == center) {
-                trueCount += 1
             }
         }
         return trueCount == this.numberOfRadii
