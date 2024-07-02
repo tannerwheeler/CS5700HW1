@@ -3,7 +3,7 @@ package org.example
 import kotlin.math.abs
 
 class Triangle(
-    _points: ArrayList<Point>
+    _points: List<Point>
 ) : OutOfRoundShape(_points) {
     override val numberOfPoints = 3
 

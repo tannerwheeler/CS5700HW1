@@ -3,7 +3,7 @@ package org.example
 import kotlin.math.abs
 
 abstract class Rectangle(
-    _points: ArrayList<Point>
+    _points: List<Point>
 ) : OutOfRoundShape(_points) {
     override val numberOfPoints = 2
 

@@ -1,7 +1,7 @@
 package org.example
 
 class Square(
-    _points : ArrayList<Point>
+    _points : List<Point>
 ) : Rectangle(_points) {
     override val numberOfPoints = 2
 

@@ -1,10 +1,10 @@
 package org.example
 
 abstract class OutOfRoundShape(
-    _points : ArrayList<Point>
+    _points : List<Point>
 ) : Shape(_points) {
 
-    fun move(newPosition : ArrayList<ArrayList<Double>>) {
+    fun move(newPosition : List<List<Double>>) {
         if (newPosition.size == this.numberOfPoints) {
             for (i in newPosition.indices) {
                 val deltaX = newPosition[i][0] - points[i].x

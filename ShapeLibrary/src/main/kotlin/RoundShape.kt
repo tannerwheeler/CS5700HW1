@@ -1,46 +1,56 @@
 package org.example
 
 abstract class RoundShape(
-    _points : ArrayList<Point>,
-    _radii : ArrayList<Line>
+    _points : List<Point>,
+    _radii : List<Double>
 ) : Shape(_points) {
     override val numberOfPoints = 1
     abstract val numberOfRadii : Int
 
-    var radii : ArrayList<Line> = _radii
+    var radii : List<Double> = _radii
         protected set(value) {
-            field = if(this.checkNumberOfRadii() && this.checkRadii(value, this.points[0])) value else throw
-            IllegalArgumentException("Incorrect Number of Radii: " +
-                    "${this.javaClass} can on have ${this.numberOfRadii} radii")
+            field = value
         }
+
+    init {
+        require(this.checkNumberOfPoints()) {
+            "$javaClass should have ${this.numberOfPoints} points"
+        }
+        require(this.checkNumberOfRadii()) {
+            "$javaClass should have ${this.numberOfRadii} radius"
+        }
+    }
 
     fun checkNumberOfRadii(): Boolean {
         return this.points.size == this.numberOfPoints &&
                 this.radii.size == this.numberOfRadii
     }
 
-    fun checkRadii(radii : ArrayList<Line>, center : Point) : Boolean {
-        var trueCount = 0
-        for (line in radii) {
-            if (line.startPoint == center && line.endPoint != center) {
-                trueCount += 1
-            }
+    fun checkRadii(radii : List<Double>) : Boolean {
+        for (radius in radii) {
+           if (radius <= 0.0) return false
         }
-        return trueCount == this.numberOfRadii
+        return true
     }
 
     fun move(
-        newPointPosition : ArrayList<ArrayList<Double>>,
-        newRadiiLengths : ArrayList<Line>
+        newPointPosition : List<List<Double>>,
+        newRadiiLengths : List<Double>
     ) {
-        if (newPointPosition.size == this.numberOfPoints && newRadiiLengths.size == this.numberOfRadii) {
-            val deltaX = newPointPosition[0][0] - points[0].x
-            val deltaY = newPointPosition[0][1] - points[0].y
-            points[0].shift(deltaX, deltaY)
-
-            if (checkRadii(newRadiiLengths, this.points[0])) {
-                radii = newRadiiLengths
-            }
+        require(newPointPosition.size == this.numberOfPoints) {
+            "$javaClass must have ${this.numberOfPoints} points"
         }
+        require(newRadiiLengths.size == this.numberOfRadii) {
+            "$javaClass must have ${this.numberOfRadii} radii"
+        }
+        require(this.checkRadii(newRadiiLengths)) {
+            "$javaClass must have radii greater than 0.0"
+        }
+
+        val deltaX = newPointPosition[0][0] - points[0].x
+        val deltaY = newPointPosition[0][1] - points[0].y
+        points[0].shift(deltaX, deltaY)
+
+        radii = newRadiiLengths
     }
 }

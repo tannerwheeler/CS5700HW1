@@ -1,16 +1,23 @@
 package org.example
 
 abstract class Shape(
-    _points : ArrayList<Point>
+    _points : List<Point>
 ) {
     abstract val numberOfPoints : Int
 
-    var points : ArrayList<Point> = _points
+    var points : List<Point> = _points
         protected set(value) {
-            field = if(this.checkNumberOfPoints()) value else throw
-                IllegalArgumentException("Incorrect Number of Points: " +
-                        "${this.javaClass} can on have ${this.numberOfPoints} points")
+            field = value
         }
+
+    init {
+        require(this.checkNumberOfPoints()) {
+            "$javaClass should have ${this.numberOfPoints} points"
+        }
+        require(this.getArea() > 0.0) {
+            "$javaClass must have area greater than 0.0"
+        }
+    }
 
     fun checkNumberOfPoints(): Boolean {
         return this.points.size == this.numberOfPoints

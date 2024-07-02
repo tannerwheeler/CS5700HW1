@@ -1,6 +1,7 @@
 import org.example.Point
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
+import kotlin.test.assertNotEquals
 
 class PointTest {
     var point = Point(1.0, 2.0)
@@ -37,10 +38,13 @@ class PointTest {
     @Test
     fun testPointEquals() {
         assertEquals(Point(1.0, 2.0), point)
-        var temp = ArrayList<Double>()
-        temp.add(1.0)
-        temp.add(2.0)
-        var tempCompare = (temp == point)
-        assertEquals(temp, true)
+    }
+
+    @Test
+    fun testPointCopy() {
+        var tempPoint = point.clone()
+        tempPoint.shift(2.0, 4.0)
+        assertNotEquals(tempPoint.x, point.x)
+        assertNotEquals(tempPoint.y, point.y)
     }
 }
