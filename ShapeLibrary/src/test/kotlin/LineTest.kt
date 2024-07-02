@@ -36,4 +36,17 @@ class LineTest {
         val length = line.getLength()
         assertEquals(5.0, length)
     }
+
+    @Test
+    fun testMoveLine() {
+        val line = Line(pointZero, pointTwo)
+        line.move(pointZero, pointOne)
+        assertEquals(0.0, line.startPoint.x)
+        assertEquals(0.0, line.startPoint.y)
+        assertEquals(1.0, line.endPoint.x)
+        assertEquals(0.0, line.endPoint.y)
+
+        val block : () -> Unit = {line.move(pointZero, pointZero)}
+        assertFailsWith<IllegalArgumentException> { block() }
+    }
 }

@@ -21,4 +21,12 @@ class Line(
         val deltaY = this.endPoint.y - this.startPoint.y
         return sqrt((deltaX * deltaX) + (deltaY * deltaY))
     }
+
+    fun move(startPoint : Point, endPoint : Point) {
+        require(!(startPoint.x == endPoint.x && startPoint.y == endPoint.y)) {
+            "Line must have a length greater than zero"
+        }
+        this.startPoint = startPoint
+        this.endPoint = endPoint
+    }
 }

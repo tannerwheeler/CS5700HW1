@@ -10,6 +10,12 @@ class Ellipse(
     override val numberOfPoints = 1
     override val numberOfRadii = 2
 
+    init {
+        require(this.getArea() > 0.0) {
+            "$javaClass must have area greater than 0.0"
+        }
+    }
+
     override fun getArea(): Double {
         // A = PI * a * b
         // See https://www.geeksforgeeks.org/how-to-find-the-equation-of-an-ellipse-given-the-center-and-two-points/

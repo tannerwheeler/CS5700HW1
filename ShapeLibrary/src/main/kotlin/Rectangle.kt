@@ -2,13 +2,19 @@ package org.example
 
 import kotlin.math.abs
 
-abstract class Rectangle(
+open class Rectangle(
     _points: List<Point>
 ) : OutOfRoundShape(_points) {
     override val numberOfPoints = 2
 
+    init {
+        require(this.getArea() > 0.0) {
+            "$javaClass must have area greater than 0.0"
+        }
+    }
+
     override fun getArea(): Double {
-        return getWidth() * getWidth()
+        return getWidth() * getHeight()
     }
 
     fun getWidth() : Double {
