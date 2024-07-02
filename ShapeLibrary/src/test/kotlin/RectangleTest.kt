@@ -24,4 +24,40 @@ class RectangleTest {
         val block2 : () -> Unit = { Rectangle(listOf(pointTwo, pointOne)) }
         assertFailsWith<IllegalArgumentException> { block() }
     }
+
+    @Test
+    fun testGetArea() {
+        var rectangle = Rectangle(listOf(pointZero, pointThree))
+        assertEquals(12.0, rectangle.getArea())
+
+        rectangle = Rectangle(listOf(pointOne, pointThree))
+        assertEquals(15.0, rectangle.getArea())
+
+        rectangle = Rectangle(listOf(pointTwo, pointThree))
+        assertEquals(20.0, rectangle.getArea())
+    }
+
+    @Test
+    fun testGetHeight() {
+        var rectangle = Rectangle(listOf(pointZero, pointThree))
+        assertEquals(3.0, rectangle.getHeight())
+
+        rectangle = Rectangle(listOf(pointOne, pointThree))
+        assertEquals(3.0, rectangle.getHeight())
+
+        rectangle = Rectangle(listOf(pointTwo, pointThree))
+        assertEquals(4.0, rectangle.getHeight())
+    }
+
+    @Test
+    fun testGetWidth() {
+        var rectangle = Rectangle(listOf(pointOne, pointThree))
+        assertEquals(5.0, rectangle.getWidth())
+
+        rectangle = Rectangle(listOf(pointTwo, pointThree))
+        assertEquals(5.0, rectangle.getWidth())
+
+        rectangle = Rectangle(listOf(pointZero, pointThree))
+        assertEquals(4.0, rectangle.getWidth())
+    }
 }

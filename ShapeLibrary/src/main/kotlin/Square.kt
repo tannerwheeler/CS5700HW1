@@ -10,8 +10,4 @@ class Square(
             "$javaClass must have area greater than 0.0"
         }
     }
-
-    override fun checkWidthAndHeight(): Boolean {
-        return getHeight() == getWidth() && getHeight() > 0.0 && getHeight() > 0.0
-    }
 }

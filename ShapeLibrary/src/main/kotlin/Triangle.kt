@@ -21,4 +21,17 @@ class Triangle(
         val portion3 = this.points[2].x * (this.points[0].y - this.points[1].y)
         return abs(portion1 + portion2 + portion3) / 2.0
     }
+
+    override fun move(newPosition : List<List<Double>>) {
+        require(newPosition.size == this.numberOfPoints
+                && !(this.points[0].x == this.points[1].x && this.points[1].x == this.points[2].x)
+                && !(this.points[0].y == this.points[1].y && this.points[1].y == this.points[2].y)) {
+            "Triangles cannot have three points on the same line"
+        }
+        for (i in newPosition.indices) {
+            val deltaX = newPosition[i][0] - points[i].x
+            val deltaY = newPosition[i][1] - points[i].y
+            points[i].shift(deltaX, deltaY)
+        }
+    }
 }
