@@ -1,6 +1,8 @@
 import org.example.Point
+import org.example.Rectangle
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
+import kotlin.test.assertFailsWith
 import kotlin.test.assertNotEquals
 
 class PointTest {
@@ -22,6 +24,12 @@ class PointTest {
 
         assertEquals(-2.0, point4.x)
         assertEquals(-3.0, point4.y)
+    }
+
+    @Test
+    fun testNaNValues() {
+        val block : () -> Unit = { Point(Double.NaN, Double.NaN) }
+        assertFailsWith<IllegalArgumentException> { block() }
     }
 
     @Test

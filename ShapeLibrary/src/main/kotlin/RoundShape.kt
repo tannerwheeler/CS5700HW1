@@ -11,11 +11,6 @@ abstract class RoundShape(
 
     var radii : List<Double> = _radii
         protected set(value) {
-            value.forEach {
-                require(it > 0.0) {
-                    "RoundShapes cannot accept negative radii."
-                }
-            }
             field = value
         }
 

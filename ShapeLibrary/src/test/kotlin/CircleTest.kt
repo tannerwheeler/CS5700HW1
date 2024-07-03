@@ -25,7 +25,6 @@ class CircleTest {
 
     @Test
     fun testNegativeRadii() {
-        var circle = Circle(listOf(pointZero), listOf(-2.0))
         val block : () -> Unit = { Circle(listOf(pointZero), listOf(-2.0)) }
         assertFailsWith<IllegalArgumentException> { block() }
     }

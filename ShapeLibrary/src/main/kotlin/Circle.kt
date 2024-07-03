@@ -19,6 +19,11 @@ class Circle(
         require(this.getArea() > 0.0) {
             "$javaClass must have area greater than 0.0"
         }
+        _radii.forEach {
+            require(it > 0.0) {
+                "RoundShapes cannot accept negative radii."
+            }
+        }
     }
 
     override fun getArea(): Double {
