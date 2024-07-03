@@ -14,11 +14,19 @@ class SquareTest {
     @Test
     fun createSquareTest() {
         val square = Square(listOf(pointZero, pointZero2))
+        assertEquals(0.0, square.points[0].x)
+        assertEquals(0.0, square.points[0].y)
+        assertEquals(1.0, square.points[1].x)
+        assertEquals(1.0, square.points[1].y)
         assertEquals(1.0, square.getArea())
         assertEquals(1.0, square.getHeight())
         assertEquals(1.0, square.getWidth())
 
         val square2 = Square(listOf(pointTwo, pointOne))
+        assertEquals(0.0, square2.points[0].x)
+        assertEquals(1.0, square2.points[0].y)
+        assertEquals(1.0, square2.points[1].x)
+        assertEquals(0.0, square2.points[1].y)
         assertEquals(1.0, square2.getArea())
         assertEquals(1.0, square2.getHeight())
         assertEquals(1.0, square2.getWidth())
@@ -55,5 +63,22 @@ class SquareTest {
 
         square = Square(listOf(pointOne, pointTwo))
         assertEquals(1.0, square.getWidth())
+    }
+
+    @Test
+    fun testMoveSquare() {
+        val square = Square(listOf(pointZero, pointZero2))
+        square.move(listOf(2.0, 2.0))
+        assertEquals(2.0, square.points[0].x)
+        assertEquals(2.0, square.points[0].y)
+        assertEquals(3.0, square.points[1].x)
+        assertEquals(3.0, square.points[1].y)
+
+        val square2 = Square(listOf(pointTwo, pointOne))
+        square2.move(listOf(2.0, -2.0))
+        assertEquals(2.0, square2.points[0].x)
+        assertEquals(-1.0, square2.points[0].y)
+        assertEquals(3.0, square2.points[1].x)
+        assertEquals(-2.0, square2.points[1].y)
     }
 }

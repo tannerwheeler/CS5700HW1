@@ -1,5 +1,7 @@
 package org.example
 
+import kotlin.math.abs
+
 abstract class RoundShape(
     _points : List<Point>,
     _radii : List<Double>
@@ -9,17 +11,13 @@ abstract class RoundShape(
 
     var radii : List<Double> = _radii
         protected set(value) {
+            value.forEach {
+                require(it > 0.0) {
+                    "RoundShapes cannot accept negative radii."
+                }
+            }
             field = value
         }
-
-    init {
-        require(this.checkNumberOfPoints()) {
-            "$javaClass should have ${this.numberOfPoints} points"
-        }
-        require(this.checkNumberOfRadii()) {
-            "$javaClass should have ${this.numberOfRadii} radius"
-        }
-    }
 
     fun checkNumberOfRadii(): Boolean {
         return this.points.size == this.numberOfPoints &&
@@ -31,26 +29,5 @@ abstract class RoundShape(
            if (radius <= 0.0) return false
         }
         return true
-    }
-
-    fun move(
-        newPointPosition : List<List<Double>>,
-        newRadiiLengths : List<Double>
-    ) {
-        require(newPointPosition.size == this.numberOfPoints) {
-            "$javaClass must have ${this.numberOfPoints} points"
-        }
-        require(newRadiiLengths.size == this.numberOfRadii) {
-            "$javaClass must have ${this.numberOfRadii} radii"
-        }
-        require(this.checkRadii(newRadiiLengths)) {
-            "$javaClass must have radii greater than 0.0"
-        }
-
-        val deltaX = newPointPosition[0][0] - points[0].x
-        val deltaY = newPointPosition[0][1] - points[0].y
-        points[0].shift(deltaX, deltaY)
-
-        radii = newRadiiLengths
     }
 }

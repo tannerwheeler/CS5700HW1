@@ -4,13 +4,19 @@ import kotlin.math.PI
 import kotlin.math.sqrt
 
 class Ellipse(
-    _points : ArrayList<Point>,
-    _radii : ArrayList<Double>
+    _points : List<Point>,
+    _radii : List<Double>
 ) : RoundShape(_points, _radii) {
     override val numberOfPoints = 1
     override val numberOfRadii = 2
 
     init {
+        require(_points.size == 1) {
+            "The points array must have 1 points"
+        }
+        require(_radii.size == 2) {
+            "The points array must have 2 radii"
+        }
         require(this.getArea() > 0.0) {
             "$javaClass must have area greater than 0.0"
         }

@@ -7,9 +7,6 @@ abstract class Shape(
 
     var points : List<Point> = _points
         protected set(value) {
-            require(value.size == numberOfPoints) {
-                "$javaClass should have ${this.numberOfPoints} points"
-            }
             field = value
         }
 
@@ -18,4 +15,10 @@ abstract class Shape(
     }
 
     abstract fun getArea() : Double
+
+    fun move(deltaShift : List<Double>) {
+        for (i in this.points.indices) {
+            points[i].shift(deltaShift[0], deltaShift[1])
+        }
+    }
 }

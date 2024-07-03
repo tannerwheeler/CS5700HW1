@@ -10,6 +10,12 @@ class Circle(
     override val numberOfRadii = 1
 
     init {
+        require(_points.size == 1) {
+            "The points array must have 1 points"
+        }
+        require(_radii.size == 1) {
+            "The points array must have 1 points"
+        }
         require(this.getArea() > 0.0) {
             "$javaClass must have area greater than 0.0"
         }

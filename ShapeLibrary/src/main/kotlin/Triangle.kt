@@ -4,10 +4,13 @@ import kotlin.math.abs
 
 class Triangle(
     _points: List<Point>
-) : OutOfRoundShape(_points) {
+) : Shape(_points) {
     override val numberOfPoints = 3
 
     init {
+        require(_points.size == 3) {
+            "The points array must have 3 points"
+        }
         require(this.getArea() > 0.0) {
             "$javaClass must have area greater than 0.0"
         }
@@ -19,19 +22,6 @@ class Triangle(
         val portion1 = this.points[0].x * (this.points[1].y - this.points[2].y)
         val portion2 = this.points[1].x * (this.points[2].y - this.points[0].y)
         val portion3 = this.points[2].x * (this.points[0].y - this.points[1].y)
-        return abs(portion1 + portion2 + portion3) / 2.0
-    }
-
-    override fun move(newPosition : List<List<Double>>) {
-        require(newPosition.size == this.numberOfPoints
-                && !(this.points[0].x == this.points[1].x && this.points[1].x == this.points[2].x)
-                && !(this.points[0].y == this.points[1].y && this.points[1].y == this.points[2].y)) {
-            "Triangles cannot have three points on the same line"
-        }
-        for (i in newPosition.indices) {
-            val deltaX = newPosition[i][0] - points[i].x
-            val deltaY = newPosition[i][1] - points[i].y
-            points[i].shift(deltaX, deltaY)
-        }
+        return 0.5 * abs(portion1 + portion2 + portion3)
     }
 }

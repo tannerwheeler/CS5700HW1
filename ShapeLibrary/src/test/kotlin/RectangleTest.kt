@@ -13,10 +13,23 @@ class RectangleTest {
 
     @Test
     fun createRectangleTest() {
-        val rectangle = Rectangle(listOf(pointZero, pointTwo))
+        var rectangle = Rectangle(listOf(pointZero, pointTwo))
+        assertEquals(0.0, rectangle.points[0].x)
+        assertEquals(0.0, rectangle.points[0].y)
+        assertEquals(1.0, rectangle.points[1].x)
+        assertEquals(1.0, rectangle.points[1].y)
         assertEquals(1.0, rectangle.getArea())
         assertEquals(1.0, rectangle.getHeight())
         assertEquals(1.0, rectangle.getWidth())
+
+        rectangle = Rectangle(listOf(pointZero, pointThree))
+        assertEquals(0.0, rectangle.points[0].x)
+        assertEquals(0.0, rectangle.points[0].y)
+        assertEquals(-4.0, rectangle.points[1].x)
+        assertEquals(-3.0, rectangle.points[1].y)
+        assertEquals(12.0, rectangle.getArea())
+        assertEquals(3.0, rectangle.getHeight())
+        assertEquals(4.0, rectangle.getWidth())
 
         val block : () -> Unit = { Rectangle(listOf(pointZero, pointOne)) }
         assertFailsWith<IllegalArgumentException> { block() }
@@ -59,5 +72,15 @@ class RectangleTest {
 
         rectangle = Rectangle(listOf(pointZero, pointThree))
         assertEquals(4.0, rectangle.getWidth())
+    }
+
+    @Test
+    fun testMoveRectangle() {
+        val rectangle = Rectangle(listOf(pointZero, pointTwo))
+        rectangle.move(listOf(2.0, -3.0))
+        assertEquals(2.0, rectangle.points[0].x)
+        assertEquals(-3.0, rectangle.points[0].y)
+        assertEquals(3.0, rectangle.points[1].x)
+        assertEquals(-2.0, rectangle.points[1].y)
     }
 }

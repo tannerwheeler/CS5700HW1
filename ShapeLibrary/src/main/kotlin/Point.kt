@@ -4,16 +4,21 @@ class Point(
     _x : Double,
     _y : Double
 ) {
-    var x = _x
+    var x : Double = 0.0
         private set(value) {
             field = if(!value.isNaN()) value else throw
             IllegalArgumentException("X value is NaN")
         }
-    var y = _y
+    var y : Double = 0.0
         private set(value) {
             field = if(!value.isNaN()) value else throw
             IllegalArgumentException("Y value is NaN")
         }
+
+    init {
+        x = _x
+        y = _y
+    }
 
     override fun equals(other: Any?): Boolean {
         return this.x == (other as Point).x && this.y == (other as Point).y
