@@ -13,16 +13,4 @@ abstract class RoundShape(
         protected set(value) {
             field = value
         }
-
-    fun checkNumberOfRadii(): Boolean {
-        return this.points.size == this.numberOfPoints &&
-                this.radii.size == this.numberOfRadii
-    }
-
-    fun checkRadii(radii : List<Double>) : Boolean {
-        for (radius in radii) {
-           if (radius <= 0.0) return false
-        }
-        return true
-    }
 }

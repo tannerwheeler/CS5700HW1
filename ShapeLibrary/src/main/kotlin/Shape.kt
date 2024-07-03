@@ -10,10 +10,6 @@ abstract class Shape(
             field = value
         }
 
-    fun checkNumberOfPoints(): Boolean {
-        return this.points.size == this.numberOfPoints
-    }
-
     abstract fun getArea() : Double
 
     fun move(deltaShift : List<Double>) {
